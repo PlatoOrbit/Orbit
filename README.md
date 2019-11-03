@@ -8,8 +8,10 @@ First, clone the repo with the following command:
 
 *git clone git@github.com:PlatoOrbit/LandingSite.git*
 
-Next, install nodejs and npm. 
+Now, download the (Google Cloud SDK)[https://cloud.google.com/sdk/docs/]
 
-Then, you can run the server with the following command
+Next, install nodejs, make, and npm.
 
-*node server.js*
+Then, you can run the server with the following commands
+
+*make init* - Does inital setup
