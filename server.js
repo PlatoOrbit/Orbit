@@ -91,11 +91,10 @@ app.get('/settings',function(req,res){
 
 app.post('/action/login', function(req,res){
   if(!req.body.email || !req.body.password){
-    res.redirect("/login");
+    res.redirect("/login?error=missing_info");
   }
   firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password).then(function(){
     res.redirect("/feed");
-
   }).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
@@ -103,7 +102,21 @@ app.post('/action/login', function(req,res){
     console.log(errorCode + ":" + errorMessage);
     res.redirect("/login?error="+encodeURI(errorCode));
   });
+});
 
+app.post('/action/register', function(req,res){
+  if(!req.body.email || !req.body.password){
+    res.redirect("/register?error=missing_info");
+  }
+  firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password).then(function(){
+    res.redirect("/login?message=account_created");
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(errorCode + ":" + errorMessage);
+    res.redirect("/register?error="+encodeURI(errorCode));
+  });
 });
 
 module.exports = app;
