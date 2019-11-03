@@ -5,9 +5,10 @@ var bodyParser = require('body-parser');
 
 //FIREBASE Config
 var firebase = require('firebase');
+var apiKeys = require('./private/api-key.json')
 // Your web app's Firebase configuration
 var firebaseConfig = {
-  apiKey: "AIzaSyBhFqRrjI6ckr4jb6pcvlYRNNpYt1eqcfQ",
+  apiKey: apiKeys.apiKey,
   authDomain: "avian-mystery-257322.firebaseapp.com",
   databaseURL: "https://avian-mystery-257322.firebaseio.com",
   projectId: "avian-mystery-257322",
@@ -88,21 +89,19 @@ app.get('/settings',function(req,res){
 
 //DEBUG ROUTES
 
-app.post('/debug/firebase_tests', function(req,res){
+app.post('/action/login', function(req,res){
   if(!req.body.email || !req.body.password){
-    res.sendStatus(400);
-    return;
+    res.redirect("/login");
   }
   firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password).then(function(){
-    console.log("Successful Login");
-    res.sendStatus(200);
+    res.redirect("/feed");
+
   }).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
     console.log(errorCode + ":" + errorMessage);
-    res.sendStatus(403);
-    // ...
+    res.redirect("/login?error="+encodeURI(errorCode));
   });
 
 });
