@@ -20,7 +20,7 @@ var server = app.listen(PORT, function(){
 //FIREBASE Config
 var admin = require("firebase-admin");
 
-var serviceAccount = require("../orbit-key.json");
+var serviceAccount = require("./private/orbit-key.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
