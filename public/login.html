@@ -1,5 +1,19 @@
 <html>
 <body>
+  <style>
+    #error-box{
+      visibility: hidden;
+      background-color:#FFC0C0;
+      color: black;
+      font-weight: bold;
+    }
+    #info-box{
+      visibility: hidden;
+      background-color:#C0FFC0;
+      color: black;
+      font-weight: bold;
+    }
+  </style>
 <script>
 function validateForm(){
 var name=document.myForm.name.value;
@@ -8,20 +22,39 @@ if (name==null||name==""){
  alert("Name can't be empty");
 return false;
 }
-if(password.length<6){
- alert("password must be at least 6 characters long.");
-return false;
 }
-}
+window.addEventListener('load', function(){
+  url = new URL(window.location.href);
+  err = url.searchParams.get("error");
+  msg = url.searchParams.get("message");
+  if(err === "auth/invalid-email"){
+    error_box = document.getElementById("error-box");
+    error_box.innerText = "Invalid Login, please try again";
+    error_box.style.visibility = 'visible';
+  }
+  else if(err){
+    error_box = document.getElementById("error-box");
+    error_box.innerText = err;
+    error_box.style.visibility = 'visible';
+  }
+  if(msg === "registered"){
+    message_box = document.getElementById("info-box");
+    message_box.innerText = "New account created! Login now!";
+    message_box.style.visibility = 'visible';
+  }
+});
+
 </script>
 <body>
-<form name="myForm" method="post" action="success.html"
-onsubmit="return validateForm()">
+<div id="error-box"></div>
+<div id="info-box"></div>
+<form name="loginForm" method="post" action="/action/login" method="post">
 <b><h2> Log In</h2></b>
 
-<b>Name:</b><input type="text" name="name" maxlength="10" size="20"><br> <br>
+<b>Email:</b><input type="text" name="email" size="20"><br> <br>
 <b>Password:</b><input type="password" name="password"><br><br>
-<input type="submit" value="Login"> 
+<input type="submit" value="Login">
 </form>
+Need an account? <a href="/register">Register</a>
 </body>
 </html>
