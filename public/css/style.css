@@ -10,7 +10,7 @@
 body {
   background: #fff;
   color: #666666;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Ayuthaya", sans-serif;
 }
 
 a {
@@ -51,8 +51,8 @@ h1, h2, h3, h4, h5, h6 {
 .back-to-top {
   position: fixed;
   display: none;
-  background: rgba(0, 0, 0, 0.2);
-  color: #fff;
+  background: rgba(170, 163, 156, 0.2);
+  color: #AAA39C;
   padding: 6px 12px 9px 12px;
   font-size: 16px;
   border-radius: 2px;
@@ -1016,6 +1016,3 @@ body.mobile-nav-active #mobile-nav-toggle {
   color: #fff;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
-
-
-
