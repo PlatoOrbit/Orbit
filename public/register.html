@@ -1,53 +1,18 @@
 <html>
+<head>
+<link href="css/basic.css" rel="stylesheet">
+</head>
 <body>
-  <style>
-    #error-box{
-      visibility: hidden;
-      background-color:#FFC0C0;
-      color: black;
-      font-weight: bold;
-    }
-    #info-box{
-      visibility: hidden;
-      background-color:#C0FFC0;
-      color: black;
-      font-weight: bold;
-    }
-  </style>
-<script>
-  function validateForm(){
-  var name=document.myForm.name.value;
-  var password=document.myForm.password.value;
-  if (name==null||name==""){
-   alert("Name can't be empty");
-  return false;
-  }
-  }
-  window.addEventListener('load', function(){
-    url = new URL(window.location.href);
-    err = url.searchParams.get("error");
-    if(err === "auth/invalid-email"){
-      error_box = document.getElementById("error-box");
-      error_box.innerText = "Invalid Login, please try again";
-      error_box.style.visibility = 'visible';
-    }
-    else if(err){
-      error_box = document.getElementById("error-box");
-      error_box.innerText = err;
-      error_box.style.visibility = 'visible';
-    }
-  });
-</script>
-<body>
-<div id="error-box"></div>
-<div id="info-box"></div>
-<form name="registerForm" method="post" action="/action/register" method="post">
-<b><h2>Registration</h2></b>
+  <div id="error-box"></div>
+  <div id="info-box"></div>
+  <form name="registerForm" method="post" action="/action/register" method="post">
+  <b><h2>Registration</h2></b>
 
-<b>Email:</b><input type="text" name="email" size="20"><br> <br>
-<b>Password:</b><input type="password" name="password"><br><br>
-<input type="submit" value="Login">
-</form>
-Already have an account? <a href="/login">Login</a>
+  <b>Email:</b><input type="text" name="email" size="20"><br> <br>
+  <b>Password:</b><input type="password" name="password"><br><br>
+  <input type="submit" value="Login">
+  </form>
+  Already have an account? <a href="/login">Login</a>
+  <script src="js/gethandler.js"></script>
 </body>
 </html>

@@ -5,18 +5,8 @@ var bodyParser = require('body-parser');
 
 //FIREBASE Config
 var firebase = require('firebase');
-var apiKeys = require('./private/api-key.json')
 // Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: apiKeys.apiKey,
-  authDomain: "avian-mystery-257322.firebaseapp.com",
-  databaseURL: "https://avian-mystery-257322.firebaseio.com",
-  projectId: "avian-mystery-257322",
-  storageBucket: "avian-mystery-257322.appspot.com",
-  messagingSenderId: "194319976758",
-  appId: "1:194319976758:web:855b2940f9eb5f67a10b97",
-  measurementId: "G-79NE0SKHV1"
-};
+var firebaseConfig = require('./private/api-key.json');
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -94,7 +84,7 @@ app.post('/action/login', function(req,res){
     res.redirect("/login?error=missing_info");
   }
   firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password).then(function(){
-    res.redirect("/feed");
+    res.redirect("/feed?message=loggedin");
   }).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
