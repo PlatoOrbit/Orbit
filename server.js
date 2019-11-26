@@ -19,7 +19,8 @@ admin.initializeApp({
 
 
 
-var db = admin.firestore;
+var db = firebase.firestore();
+
 
 //Configs
 //make way for some custom css, js and images
@@ -69,8 +70,26 @@ app.get('/register',function(req,res){
   static_serve('register.html',res);
 });
 
+app.get('/test',function(req,res){
+  static_serve('demo.html',res);
+});
+
 app.get('/feed',function(req,res){
-  static_serve('feed.html',res);
+  var user = firebase.auth().currentUser;
+  if (user) {
+    static_serve('feed.html',res);
+  } else {
+    res.redirect("/login?error=need_to_login")
+  }
+});
+
+app.get('/profile',function(req,res){
+  var user = firebase.auth().currentUser;
+  if (user) {
+    static_serve('profile.html',res);
+  } else {
+    res.redirect("/login?error=need_to_login")
+  }
 });
 
 app.get('/settings',function(req,res){
@@ -109,4 +128,51 @@ app.post('/action/register', function(req,res){
   });
 });
 
+app.get('/action/user', function(req,res){
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    res.json(user);
+  } else {
+    res.sendStatus(403);
+  }
+  });
+});
+
+app.get('/action/user_token',function(req,res){
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    res.json(user.getToken());
+  } else {
+    res.sendStatus(403);
+  }
+  });
+});
+
+app.get('/action/signout',function(){
+  firebase.auth().signOut().then(function() {
+    res.redirect("/login?message=logged_out_successfully");
+  }).catch(function(error) {
+    res.sendStatus(500);
+  });
+});
+
+app.get('/action/test_db',function(req,res){
+  const rssRef = db.collection('rss-feeds');
+  let querryRef = rssRef.where('feedURL','==',true).get()
+  .then(snapshot => {
+    if (snapshot.empty) {
+      console.log('No matching documents.');
+      res.sendStatus(200);
+    }
+
+    snapshot.forEach(doc => {
+      console.log(doc.id, '=>', doc.data());
+      res.sendStatus(200);
+    });
+  })
+  .catch(err => {
+    console.log('Error getting documents', err);
+    res.sendStatus(400);
+  });
+});
 module.exports = app;

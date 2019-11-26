@@ -2,7 +2,7 @@ function get_data() {
   return;
 }
 
-  const buildBoxElement = config => {
+function buildBoxElement(config){
   //Elements in a box
   content = document.createElement("div");
   contentheader = document.createElement("h4");
@@ -19,8 +19,8 @@ function get_data() {
   return content
 };
   //append dynamic content
-  const appendBoxElement = content => {
-  body = document.querySelector("body");
+function appendBoxElement(content){
+  body = document.getElementById("feed");
   body.append(content);
 };
 data = get_data();
