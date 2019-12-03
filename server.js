@@ -5,18 +5,8 @@ var bodyParser = require('body-parser');
 
 //FIREBASE Config
 var firebase = require('firebase');
-var apiKeys = require('./private/api-key.json')
 // Your web app's Firebase configuration
-var firebaseConfig = {
-  apiKey: apiKeys.apiKey,
-  authDomain: "avian-mystery-257322.firebaseapp.com",
-  databaseURL: "https://avian-mystery-257322.firebaseio.com",
-  projectId: "avian-mystery-257322",
-  storageBucket: "avian-mystery-257322.appspot.com",
-  messagingSenderId: "194319976758",
-  appId: "1:194319976758:web:855b2940f9eb5f67a10b97",
-  measurementId: "G-79NE0SKHV1"
-};
+var firebaseConfig = require('./private/api-key.json');
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -29,7 +19,8 @@ admin.initializeApp({
 
 
 
-var db = admin.firestore;
+var db = firebase.firestore();
+
 
 //Configs
 //make way for some custom css, js and images
@@ -79,8 +70,26 @@ app.get('/register',function(req,res){
   static_serve('register.html',res);
 });
 
+app.get('/test',function(req,res){
+  static_serve('demo.html',res);
+});
+
 app.get('/feed',function(req,res){
-  static_serve('feed.html',res);
+  var user = firebase.auth().currentUser;
+  if (user) {
+    static_serve('feed.html',res);
+  } else {
+    res.redirect("/login?error=need_to_login")
+  }
+});
+
+app.get('/profile',function(req,res){
+  var user = firebase.auth().currentUser;
+  if (user) {
+    static_serve('profile.html',res);
+  } else {
+    res.redirect("/login?error=need_to_login")
+  }
 });
 
 app.get('/settings',function(req,res){
@@ -94,7 +103,7 @@ app.post('/action/login', function(req,res){
     res.redirect("/login?error=missing_info");
   }
   firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password).then(function(){
-    res.redirect("/feed");
+    res.redirect("/feed?message=loggedin");
   }).catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
@@ -118,5 +127,71 @@ app.post('/action/register', function(req,res){
     res.redirect("/register?error="+encodeURI(errorCode));
   });
 });
+
+app.get('/action/user', function(req,res){
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    res.json(user);
+  } else {
+    res.sendStatus(403);
+  }
+  });
+});
+
+app.get('/action/user_token',function(req,res){
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    res.json(user.getToken());
+  } else {
+    res.sendStatus(403);
+  }
+  });
+});
+
+app.get('/action/signout',function(req,res){
+  firebase.auth().signOut().then(function() {
+    res.redirect("/login?message=logged_out_successfully");
+  }).catch(function(error) {
+    res.sendStatus(500);
+  });
+});
+
+app.get('/action/test_db',function(req,res){
+  const rssRef = db.collection('rss-feeds');
+  let querryRef = rssRef.where('feedURL','==',true).get()
+  .then(snapshot => {
+    if (snapshot.empty) {
+      console.log('No matching documents.');
+      res.sendStatus(200);
+    }
+
+    snapshot.forEach(doc => {
+      console.log(doc.id, '=>', doc.data());
+      res.sendStatus(200);
+    });
+  })
+  .catch(err => {
+    console.log('Error getting documents', err);
+    res.sendStatus(400);
+  });
+});
+
+app.get('/debug/testFirebase',function(req,res){
+  var feed = require('./public/js/feedLoader.js');
+  feed.loadUserQueue({"uid":"nduIHmJ6xGeRM2VVmGUTAAQrPRh2"},db).then(feed =>{
+
+    //@TODO: Figure out how to fix responsiveness Issues
+    setTimeout(function(){
+      //do what you need here
+      res.json(feed);
+      // res.sendStatus(200);
+    }, 2000);
+
+  }).catch(err => {
+    console.log(err);
+  });
+
+});
+
 
 module.exports = app;

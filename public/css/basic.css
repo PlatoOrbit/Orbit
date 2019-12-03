@@ -1,0 +1,18 @@
+#error-box{
+  visibility: hidden;
+  background-color:#FFC0C0;
+  color: black;
+  font-weight: bold;
+}
+#info-box{
+  visibility: hidden;
+  background-color:#C0FFC0;
+  color: black;
+  font-weight: bold;
+}
+#feed{
+  background-color: #95a5a6;
+}
+#preview{
+  background-color: #34495e;
+}

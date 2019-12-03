@@ -1,0 +1,14 @@
+<head>
+
+</head>
+<body>
+  <div id="profile-space"></div>
+  <script type="application/javascript">
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      console.log(this);
+    };
+    xhr.open('GET', '/action/user',true);
+    xhr.send()
+  </script>
+</body>
