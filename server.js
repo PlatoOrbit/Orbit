@@ -148,7 +148,7 @@ app.get('/action/user_token',function(req,res){
   });
 });
 
-app.get('/action/signout',function(){
+app.get('/action/signout',function(req,res){
   firebase.auth().signOut().then(function() {
     res.redirect("/login?message=logged_out_successfully");
   }).catch(function(error) {
@@ -175,4 +175,23 @@ app.get('/action/test_db',function(req,res){
     res.sendStatus(400);
   });
 });
+
+app.get('/debug/testFirebase',function(req,res){
+  var feed = require('./public/js/feedLoader.js');
+  feed.loadUserQueue({"uid":"nduIHmJ6xGeRM2VVmGUTAAQrPRh2"},db).then(feed =>{
+
+    //@TODO: Figure out how to fix responsiveness Issues
+    setTimeout(function(){
+      //do what you need here
+      res.json(feed);
+      // res.sendStatus(200);
+    }, 2000);
+
+  }).catch(err => {
+    console.log(err);
+  });
+
+});
+
+
 module.exports = app;
