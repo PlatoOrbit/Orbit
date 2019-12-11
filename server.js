@@ -185,12 +185,46 @@ app.get('/debug/testFirebase',function(req,res){
       //do what you need here
       res.json(feed);
       // res.sendStatus(200);
-    }, 2000);
+    }, 8000);
 
   }).catch(err => {
     console.log(err);
   });
+});
 
+app.get('/debug/loadUser', function(req,res){
+  let feedquerry = db.collection('userFeeds').doc("nduIHmJ6xGeRM2VVmGUTAAQrPRh2");
+  feedquerry.get().then(doc => {
+      res.send(doc.data());
+  })
+  .catch(err => {
+        console.log('Error getting documents', err);
+        res.sendStatus(500);
+  });
+});
+
+app.get('/debug/database',function(req,res){
+  res.send(db);
+});
+
+app.post('/debug/getPublicFeedURL',function(req,res){
+  db.collection('publicFeeds').doc(req.params.publicID).get()
+  .then(doc =>{
+    res.send(doc.data().url);
+  }).catch(err  => {
+    res.sendStatus(400);
+  })
+});
+
+app.post('/debug/parseRSS',function(req,res){
+  return parser.parseURL(req.params.url, function(err,feed){
+    let queue = [];
+    for(let i=0;i<5;i++){
+      let current_item = feed.items[i];
+      queue.append({"type":"story","title":current_item.title, "URL": current_item.link});
+    }
+    return queue;
+  });
 });
 
 

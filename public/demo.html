@@ -7,6 +7,8 @@
   <meta content="" name="keywords">
   <meta content="" name="description">
 
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <!-- Favicons -->
   <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -17,124 +19,116 @@
   <!-- Bootstrap CSS File -->
   <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Libraries CSS Files -->
-  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/378fada152.js" crossorigin="anonymous"></script>
 
   <!-- Main Stylesheet File -->
-  <link href="css/style.css" rel="stylesheet">
+  <link href="css/basic.css" rel="stylesheet">
 
-  <!-- =======================================================
-    Theme Name: Regna
-    Theme URL: https://bootstrapmade.com/regna-bootstrap-onepage-template/
-    Author: BootstrapMade.com
-    License: https://bootstrapmade.com/license/
-  ======================================================= -->
+
   <style>
     body{
       width: 100%;
     }
-    #feed{
-      padding-top: 10px;
-      padding-bottom: 10px;
-      background-color:#95a5a6;
-    }
-    #preview{
-      background-color:#2c3e50;
-      padding: 10px;
-      color:white;
-    }
-    .feed-item{
-      padding: 50px;
-      margin-bottom: 5px;
-      border: solid black 3px;
-      background-color:#ecf0f1;
-      cursor: pointer;
-      border-radius: 10px;
-    }
-    .vertical-center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
 
-    /* The sidebar menu */
-.sidenav {
-  height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 30%; /* Set the width of the sidebar */
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  right: 0;
-  background-color: #111; /* Black */
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 20px;
-}
-
-/* The navigation menu links */
-.sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-}
-
-/* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
-/* Style page content */
-.main {
-  margin-right: 30%; /* Same as the width of the sidebar */
-  padding: 0px 10px;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-  #iFramePreview{
-    height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 30%; /* Set the width of the sidebar */
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 2; /* Stay on top */
-    top: 0; /* Stay at the top */
-    right: 0;
-    background-color: #111; /* Black */
-    overflow-x: hidden; /* Disable horizontal scroll */
-    visibility: hidden;
-  }
-  .iframe-link{
-    visibility: hidden;
-  }
-  .preview-image{
-
-    max-height: 100px;
-    margin-right: 10px;
-  }
   </style>
 </head>
 <body>
-    <div id="preview" class="sidenav">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="feed-nav">
+  <a class="navbar-brand" href="/test">Orbit</a>
+  <a class="nav-link dropdown-toggle" href="#" id="viewsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Views</a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="views-dropdown">
+    <a class="dropdown-item" href="#">Action</a>
+  </div>
+  <button class="btn btn-light" id="refresh" onclick="refreshFeed()"><i class="fas fa-sync" id="refresh-spinner" ></i> Refresh</button>
+  <button class="btn btn-light" type="button" id="settings" data-toggle="modal" data-target="#settingsModal"><i class="fas fa-sliders-h"></i> Settings</button>
+  <button class="btn btn-light" type="button" id="sources" data-toggle="modal" data-target="#sourcesModal"><i class="fas fa-inbox"></i> Sources</button>
+  <button class="btn btn-light" type="button" id="rules" data-toggle="modal" data-target="#rulesModal"><i class="fas fa-code"></i> Rules</button>
 
+
+</nav>
+
+    <div id="preview" class="sidenav">
       <p class="vertical-center">This is the preview area. If a provider allows you to embed resources, you will see it here. Otherwise, we will just open another page. </p>
        <iframe name="iFramePreview" id="iFramePreview"></iframe>
 
     </div>
   <div id="feed" class="main">
-    <div class="feed-item" data-iframeLink="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.850574897747!2d-83.01001721592384!3d40.00625070081755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88388ea3555d5397%3A0x1f83030bafcb1f6a!2sBuffalo%20Wild%20Wings!5e0!3m2!1sen!2sus!4v1574718338497!5m2!1sen!2sus">Alert: New Restaurant Opened</div>
-    <div class="feed-item"><blockquote class="reddit-card" data-card-created="1574720289"><a href="https://www.reddit.com/r/Art/comments/e1fjcb/calorie_composition_ii_me_oil_on_canvas_print_2019/">Calorie Composition II, me, oil on canvas print, 2019</a> from <a href="http://www.reddit.com/r/Art">r/Art</a></blockquote>
-<script async src="//embed.redditmedia.com/widgets/platform.js" charset="UTF-8"></script></div>
-  <div class="feed-item center-content"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">It’s that ti❌e of the year. <a href="https://t.co/v7s7rtnkpI">pic.twitter.com/v7s7rtnkpI</a></p>&mdash; Ohio State (@OhioState) <a href="https://twitter.com/OhioState/status/1198965913967583236?ref_src=twsrc%5Etfw">November 25, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+
+
+
+  <!--Settings Modal-->
+  <div class="modal fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Settings</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" >
+          <form id="settings-body"></form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
   </div>
 
+
+  <!-- Sources Modal -->
+  <div class="modal fade" id="sourcesModal" tabindex="-1" role="dialog" aria-labelledby="sourcesModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="sourcesModalLabel">Sources Modal</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" >
+          <form id="sources-body"></form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rules Modal -->
+  <div class="modal fade" id="rulesModal" tabindex="-1" role="dialog" aria-labelledby="rulesModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="rulesModalLabel">Rules Modal</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="rules-body"></form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
   <script>
-    var classname = document.getElementsByClassName("feed-item");
+    var queue = [{"type":"maps","text":"New Restaurant Opened","link":"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.850574897747!2d-83.01001721592384!3d40.00625070081755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88388ea3555d5397%3A0x1f83030bafcb1f6a!2sBuffalo%20Wild%20Wings!5e0!3m2!1sen!2sus!4v1574718338497!5m2!1sen!2sus"},{"type":"story","title":"Star Fox 2, Super Punch-Out!! coming to Nintendo Switch Online in December","URL":"https://www.polygon.com/2019/12/4/20996289/nintendo-switch-online-snes-nes-games-december-star-fox-2-super-punch-out"},{"type":"story","title":"The new Star Wars dark ride Rise of the Resistance delivers sensory overload","URL":"https://www.polygon.com/star-wars/2019/12/4/20996002/rise-of-the-resistance-opening-review-pov-galaxys-edge-star-wars-land-disney-world"},{"type":"story","title":"Tom Clancy’s The Division 2 gets a permadeath mode next week and ... snowballs?","URL":"https://www.polygon.com/2019/12/4/20996168/tom-clancys-the-division-2-permadeath-mode-pc-ps4-xbox-one-update-ubisoft"},{"type":"story","title":"Disney’s Star Wars land hotel opens in 2021, here’s how it works","URL":"https://www.polygon.com/2019/12/4/20995951/star-wars-land-hotel-opening-day-2021-price-per-night"},{"type":"story","title":"Pokémon Go is getting an evolution-themed event, featuring Shiny Burmy","URL":"https://www.polygon.com/pokemon-go/2019/12/4/20995945/pokemon-go-evolution-event-dates-time-shiny-burmy"},{"type":"story","title":"Vikings: Season 6 Premiere Review","URL":"http://feeds.ign.com/~r/ign/all/~3/7iQOdlqo_Ko/vikings-season-6-premiere-new-beginnings-the-prophet-review-recap-bjorn-ivar-lagertha"},{"type":"story","title":"What Did You Think of Tonight's South Park?","URL":"http://feeds.ign.com/~r/ign/all/~3/DvgUZju_ilM/south-park-season-23-episode-8-basic-cable-review"},{"type":"story","title":"The Best Cyber Monday 2019 Dell Deals (Updated)","URL":"http://feeds.ign.com/~r/ign/all/~3/irx17eYJo5M/best-black-friday-2019-dell-deals-alienware-gaming-laptops-desktop-pcs-monitors-vizio-lg-oled-tvs-ps4-slim-ps4-pro-xbox"},{"type":"story","title":"December's Nintendo Switch Online NES and SNES Games Announced","URL":"http://feeds.ign.com/~r/ign/all/~3/TpRqoxaBd-Q/decembers-nintendo-switch-online-nes-and-snes-games-announced-kirby-super-star-star-fox-2-super-punch-out"},{"type":"story","title":"Batman #84 Review","URL":"http://feeds.ign.com/~r/ign/all/~3/W5dZRtROcg4/batman-84-review"}];
+    //Iframe Loader Code
 
     var myFunction = function() {
         var iframeLink = this.getAttribute("data-iframeLink");
@@ -147,21 +141,182 @@
         else if(normalLink){
           window.open(normalLink, '_blank');
         }
-
-
     };
 
-    for (var i = 0; i < classname.length; i++) {
-        classname[i].addEventListener('click', myFunction, false);
-        let url = classname[i].getAttribute("data-previewImg")
-        if(url){
-          let img = document.createElement("IMG");
-          img.src = url;
-          img.classList.add("preview-image");
-          classname[i].prepend(img);
-        }
+    function generateModalForm(id,obj,field){
+      let formLine = document.createElement("div");
+      formLine.classList.add("form-group");
+
+      let label = document.createElement("label");
+      label.innerText=field;
+      formLine.append(label);
+
+      let input = document.createElement('input');
+      input.setAttribute("placeholder",obj[field]);
+      input.setAttribute("disabled","disabled");
+      formLine.append(input);
+
+      document.getElementById(id).append(formLine);
+    }
+
+
+    //Loading User Data
+    const Http = new XMLHttpRequest();
+    const url='/debug/loadUser';
+    Http.open("GET", url);
+    var responseRecieved = false;
+    Http.onreadystatechange = (e) => {
+      if(responseRecieved || Http.responseText.length === 0){
+        return;
+      }
+      else{
+        responseRecieved = true;
+      }
+      user = JSON.parse(Http.responseText);
+      console.log(user);
+      //Populate Settings modal
+      let settings = user.settings;
+      generateModalForm("settings-body", settings, "age");
+      //Populate Rules Modal
+
+
+      //Populate Sources Modal
+      let sourcesBody = document.getElementById("sources-body");
+      let sources = user.sources;
+      sources.forEach(source => {
+        //Insert into Modal
+        generateModalForm("sources-body",source,"name");
+        //Ingest Source
+        // addSource(source);
+      });
+
+      //Populate Views Dropdown and Rules Modal
+      let dropDownBody = document.getElementById("views-dropdown");
+      let rulesBody = document.getElementById("rules-body");
+      dropDownBody.innerText="";
+      rulesBody.innerText="";
+      let views = user.views;
+      views.forEach(view => {
+        let link = document.createElement("a");
+        link.setAttribute('href',"#");
+        link.classList.add("dropdown-item");
+        link.innerText = view.name;
+        link.setAttribute('onclick','updateOrder()');
+        dropDownBody.append(link);
+
+        let formHeader = document.createElement("h4");
+        formHeader.innerText = "View: " + view.name;
+        view.rules.forEach(rule => {
+          generateModalForm("rules-body",rule,"type");
+          generateModalForm("rules-body", rule, "rule");
+        });
+        rulesBody.append(document.createElement("hr"));
+      });
 
     }
+    Http.send();
+
+
+
+    function refreshFeed(){
+      console.log("Refreshing Feed");
+      document.getElementById("refresh-spinner").classList.add("fa-spin");
+      document.getElementById("refresh").setAttribute('disabled','disabled');
+      displayFeed();
+      setTimeout(function(){
+        document.getElementById("refresh-spinner").classList.remove("fa-spin");
+        document.getElementById("refresh").removeAttribute('disabled');
+      },2000);
+    }
+    function addSourceRSS(url){
+
+      let urlGetter = new XMLHttpRequest();
+      let params = JSON.stringify({"url":url});
+      urlGetter.open("POST","/debug/parseRSS",true);
+      urlGetter.setRequestHeader("Content-type", "JSON")
+      urlGetter.onreadystatechange = function(){
+        console.log("Recieved Change");
+      }
+      urlGetter.send(params);
+
+      // parser.parseURL(url, function(err,feed){
+      //   for(let i=0;i<5;i++){
+      //     let current_item = feed.items[i];
+      //     addElem({"title":current_item.title, "URL": current_item.link});
+      //   }
+      // });
+    }
+    function addSource(source){
+      let type = source.type;
+      if(type==="rss-public"){
+        //Load first 5 articles
+        // let urlGetter = new XMLHttpRequest();
+        // let params = JSON.stringify({"publicID":source.publicID});
+        // urlGetter.open("POST","/debug/getPublicFeedURL",true);
+        // urlGetter.setRequestHeader("Content-type", "applications")
+        // urlGetter.setRequestHeader("Content-length", params.length);
+        // urlGetter.setRequestHeader("Connection","close");
+        //
+        // urlGetter.onreadystatechange = function(){
+        //   addSourceRSS(queue,urlGetter.responseText);
+        // }
+        // urlGetter.send(params);
+      }
+      else if(type === "rss-custom"){
+        //Load first 5 articles
+        addSourceRSS(source.url);
+      }
+    }
+
+
+    function generateHuerstic(){
+        return;
+    }
+    function sortFeed(){
+      return;
+    }
+    function addElem(elem){
+      queue.append(elem);
+      displayElem(elem);
+    }
+    function displayElem(elem){
+      let feedDiv = document.getElementById("feed");
+      //Create new Feed Block
+      let newBlock = document.createElement("div");
+      newBlock.classList.add("feed-item");
+      //Create block based on type
+      let type = elem.type;
+      let text = document.createElement("p");
+      newBlock.append(text);
+      if(type === "maps"){
+        text.innerText = "Maps: " + elem.text;
+        newBlock.setAttribute("data-iframeLink",elem.link);
+      }
+      else if(type==="story"){
+        text.innerText = "News: " + elem.title;
+        newBlock.setAttribute("data-normalLink",elem.URL);
+      }
+      //Add Elem to feed
+      feedDiv.append(newBlock);
+      newBlock.addEventListener('click', myFunction, false);
+    }
+    function displayFeed(){
+      //Clear Feed
+      document.getElementById("feed").innerHTML = "";
+      //Reprint Feed
+      let delay = 5;
+      queue.forEach(elem =>{
+        setTimeout(function(){displayElem(elem)},delay);
+        delay= delay + (Math.random() * 200);
+      });
+    }
+    function updateOrder(){
+      queue.sort(()=>Math.random() - 0.5);
+      displayFeed();
+    }
+
+    // refreshFeed();
+    // displayFeed();
   </script>
 
 </body>

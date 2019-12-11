@@ -35,7 +35,7 @@ function addSource(queue, source, db){
   let type = source.type;
   if(type==="rss-public"){
     //Load first 5 articles
-    return db.collection('publicFeeds').doc(source.publicID).get()
+    db.collection('publicFeeds').doc(source.publicID).get()
     .then(doc =>{
       if(!doc.exists){
         console.log("No Matching documents!");
@@ -45,7 +45,7 @@ function addSource(queue, source, db){
         parser.parseURL(doc.data().url, function(err,feed){
           for(let i=0;i<5;i++){
             let current_item = feed.items[i];
-            queue.push({"title":current_item.title, "URL": current_item.link});
+            queue.push({"type":"story","title":current_item.title, "URL": current_item.link});
           }
         });
       }
@@ -56,7 +56,7 @@ function addSource(queue, source, db){
     return parser.parseURL(source.url, function(err,feed){
       for(let i=0;i<5;i++){
         let current_item = feed.items[i];
-        queue.push({"title":current_item.title, "URL": current_item.link});
+        queue.push({"type":"story","title":current_item.title, "URL": current_item.link});
       }
     });
 }
